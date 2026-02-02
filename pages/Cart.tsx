@@ -1,7 +1,7 @@
 import React from 'react';
 import { useCart } from '../context/CartContext';
 import { Link, useNavigate } from 'react-router-dom';
-import { Trash2, Plus, Minus, ArrowRight, ShoppingBag } from 'lucide-react';
+import { Trash2, Plus, Minus, ArrowRight, ShoppingBag, Package } from 'lucide-react';
 
 const Cart: React.FC = () => {
   const { cart, removeFromCart, updateQuantity, cartTotal } = useCart();
@@ -48,7 +48,14 @@ const Cart: React.FC = () => {
                 <div key={item.id} className="p-4 grid grid-cols-1 md:grid-cols-12 gap-4 items-center">
                   {/* Product Info */}
                   <div className="col-span-1 md:col-span-6 flex items-center gap-4">
-                    <img src={item.image} alt={item.name} className="w-16 h-16 object-cover rounded bg-gray-100" />
+                    {item.image ? (
+                        <img src={item.image} alt={item.name} className="w-16 h-16 object-cover rounded bg-gray-100" />
+                    ) : (
+                        <div className="w-16 h-16 bg-gray-100 rounded flex items-center justify-center text-gray-300">
+                            <Package className="w-8 h-8" />
+                        </div>
+                    )}
+                    
                     <div>
                       <h3 className="font-semibold text-gray-800 text-sm md:text-base line-clamp-1">{item.name}</h3>
                       <p className="text-xs text-gray-500 mt-1 block md:hidden">Unitário: R$ {item.price.toFixed(2)}</p>

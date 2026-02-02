@@ -3,7 +3,7 @@ import { Product } from '../types';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
 import { useFavorites } from '../context/FavoritesContext';
-import { ShoppingCart, Heart } from 'lucide-react';
+import { ShoppingCart, Heart, Package } from 'lucide-react';
 
 interface ProductCardProps {
   product: Product;
@@ -31,20 +31,29 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
   return (
     <div className="group bg-white rounded-lg border border-gray-100 hover:border-brand-blue/30 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full relative overflow-hidden text-sm">
       
-      {/* Container de imagem com fundo cinza escuro para contraste se a imagem falhar ou for clara */}
-      <Link to={`/produto/${product.id}`} className="block relative h-40 md:h-48 overflow-hidden bg-gray-200">
-        <img 
-          src={product.image} 
-          alt={product.name} 
-          className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-          loading="lazy"
-          onError={(e) => {
-            (e.target as HTMLImageElement).src = 'https://placehold.co/400x400/e2e8f0/1e293b?text=Sem+Imagem';
-          }}
-        />
+      {/* Container de imagem / Placeholder */}
+      <Link to={`/produto/${product.id}`} className="block relative h-40 md:h-48 overflow-hidden bg-gray-50">
+        {product.image ? (
+          <img 
+            src={product.image} 
+            alt={product.name} 
+            className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+            loading="lazy"
+            onError={(e) => {
+              (e.target as HTMLImageElement).style.display = 'none';
+              (e.target as HTMLImageElement).nextElementSibling?.classList.remove('hidden');
+            }}
+          />
+        ) : (
+          <div className="w-full h-full flex items-center justify-center bg-gray-100 text-gray-300 group-hover:bg-gray-200 transition-colors">
+            <Package className="w-12 h-12" />
+          </div>
+        )}
         
-        {/* Overlay gradiente suave para destacar texto se houver sobreposição */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/10 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+        {/* Fallback oculto para erro de img (caso image não seja vazio mas falhe) */}
+        <div className="hidden absolute inset-0 flex items-center justify-center bg-gray-100 text-gray-300">
+           <Package className="w-12 h-12" />
+        </div>
 
         {/* Badges */}
         <div className="absolute top-2 left-2 flex flex-col gap-1 z-10">

@@ -1,8 +1,9 @@
 import React, { useMemo, useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { PRODUCTS, CATEGORIES } from '../services/mockData';
+import { dataService } from '../services/dataService';
+import { Product, Category } from '../types';
 import ProductCard from '../components/ProductCard';
-import { Filter, X, ChevronRight, SlidersHorizontal, ArrowUpDown, Check } from 'lucide-react';
+import { Filter, X, ChevronRight, SlidersHorizontal, ArrowUpDown, Check, Loader2 } from 'lucide-react';
 
 type SortOption = 'relevance' | 'price_asc' | 'price_desc' | 'name_asc';
 
@@ -11,6 +12,11 @@ const ProductList: React.FC = () => {
   const categoryFilter = searchParams.get('categoria');
   const searchFilter = searchParams.get('search');
   
+  // Data State
+  const [products, setProducts] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(true);
+
   // Local Filter States
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
   const [localMinPrice, setLocalMinPrice] = useState('');
@@ -19,22 +25,39 @@ const ProductList: React.FC = () => {
   const [appliedPriceRange, setAppliedPriceRange] = useState<{min: number, max: number}>({ min: 0, max: Infinity });
   const [sortOption, setSortOption] = useState<SortOption>('relevance');
 
+  useEffect(() => {
+    const loadData = async () => {
+      setLoading(true);
+      try {
+        const [prodData, catData] = await Promise.all([
+          dataService.getProducts(),
+          dataService.getCategories()
+        ]);
+        setProducts(prodData);
+        setCategories(catData);
+      } catch (error) {
+        console.error("Erro ao carregar produtos", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadData();
+  }, []);
+
   // Derive available brands safely
   const availableBrands = useMemo(() => {
     const relevantProducts = categoryFilter 
-        ? PRODUCTS.filter(p => p.category === categoryFilter)
-        : PRODUCTS;
-    // Filter Boolean ensures we don't get undefined values
+        ? products.filter(p => p.category === categoryFilter)
+        : products;
     const brands = Array.from(new Set(relevantProducts.map(p => p.brand).filter((b): b is string => !!b)));
     return brands.sort();
-  }, [categoryFilter]);
+  }, [categoryFilter, products]);
 
   // Sync selected brands when URL changes or category changes (reset)
   useEffect(() => {
     setSelectedBrands([]);
   }, [categoryFilter]);
 
-  // Handler to Apply Price Filter
   const applyPriceFilter = () => {
     const min = localMinPrice ? parseFloat(localMinPrice) : 0;
     const max = localMaxPrice ? parseFloat(localMaxPrice) : Infinity;
@@ -50,27 +73,18 @@ const ProductList: React.FC = () => {
 
   // Filter Logic
   const filteredProducts = useMemo(() => {
-    let result = PRODUCTS.filter(p => {
-      // Category Filter
+    let result = products.filter(p => {
       const matchCategory = categoryFilter ? p.category === categoryFilter : true;
-      
-      // Search Filter (Safe check for brand)
       const matchSearch = searchFilter 
         ? p.name.toLowerCase().includes(searchFilter.toLowerCase()) || 
           p.description.toLowerCase().includes(searchFilter.toLowerCase()) ||
           (p.brand && p.brand.toLowerCase().includes(searchFilter.toLowerCase()))
         : true;
-
-      // Price Filter
       const matchPrice = p.price >= appliedPriceRange.min && p.price <= appliedPriceRange.max;
-
-      // Brand Filter (Safe check)
       const matchBrand = selectedBrands.length > 0 ? (p.brand ? selectedBrands.includes(p.brand) : false) : true;
-
       return matchCategory && matchSearch && matchPrice && matchBrand;
     });
 
-    // Sorting Logic
     return result.sort((a, b) => {
       switch (sortOption) {
         case 'price_asc': return a.price - b.price;
@@ -79,10 +93,10 @@ const ProductList: React.FC = () => {
         default: return 0;
       }
     });
-  }, [categoryFilter, searchFilter, appliedPriceRange, sortOption, selectedBrands]);
+  }, [categoryFilter, searchFilter, appliedPriceRange, sortOption, selectedBrands, products]);
 
   const activeCategoryName = categoryFilter 
-    ? CATEGORIES.find(c => c.id === categoryFilter)?.name 
+    ? categories.find(c => c.id === categoryFilter)?.name 
     : 'Todos os Produtos';
 
   const clearFilters = () => {
@@ -94,6 +108,14 @@ const ProductList: React.FC = () => {
     setSortOption('relevance');
     setIsMobileFiltersOpen(false);
   };
+
+  if (loading) {
+     return (
+       <div className="min-h-screen flex items-center justify-center">
+         <Loader2 className="w-10 h-10 text-brand-blue animate-spin" />
+       </div>
+     );
+  }
 
   const FilterSidebarContent = () => (
     <div className="space-y-8">
@@ -125,7 +147,7 @@ const ProductList: React.FC = () => {
                 {!categoryFilter && <Check className="w-4 h-4" />}
               </button>
             </li>
-            {CATEGORIES.map(cat => (
+            {categories.map(cat => (
               <li key={cat.id}>
                 <button
                   onClick={() => { setSearchParams({ categoria: cat.id }); setIsMobileFiltersOpen(false); }}

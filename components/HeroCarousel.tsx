@@ -9,7 +9,6 @@ const SLIDES = [
     title: 'Operação Casa Reformada',
     subtitle: 'Comece o ano tirando seus planos do papel.',
     buttonText: 'Faça já sua reforma',
-    image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=1200&auto=format&fit=crop', // Construction/Tools vibe
     link: '/produtos?categoria=construcao'
   },
   {
@@ -18,7 +17,6 @@ const SLIDES = [
     title: 'Festival de Ferramentas',
     subtitle: 'Kits profissionais com até 40% OFF.',
     buttonText: 'Ver Ofertas',
-    image: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?q=80&w=1200&auto=format&fit=crop', // Tools vibe
     link: '/produtos?categoria=ferramentas'
   },
   {
@@ -27,7 +25,6 @@ const SLIDES = [
     title: 'Iluminação & Elétrica',
     subtitle: 'Renove a energia da sua casa com segurança.',
     buttonText: 'Comprar Agora',
-    image: 'https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?q=80&w=1200&auto=format&fit=crop', // Electric vibe
     link: '/produtos?categoria=eletrica'
   }
 ];
@@ -44,7 +41,7 @@ const HeroCarousel: React.FC = () => {
   }, []);
 
   return (
-    <div className="relative w-full h-[280px] md:h-[400px] overflow-hidden group">
+    <div className="relative w-full h-[280px] md:h-[400px] overflow-hidden group bg-gray-800">
       {/* Slides Container */}
       <div 
         className="flex transition-transform duration-500 ease-out h-full"
@@ -52,13 +49,11 @@ const HeroCarousel: React.FC = () => {
       >
         {SLIDES.map((slide) => (
           <div key={slide.id} className="min-w-full h-full relative">
-            {/* Background Image with Overlay */}
-            <div className="absolute inset-0 bg-gray-900">
-               <img src={slide.image} alt="" className="w-full h-full object-cover opacity-40 mix-blend-overlay" />
-            </div>
+            {/* Background Color Gradient */}
+            <div className={`absolute inset-0 ${slide.bgClass}`}></div>
             
-            {/* Gradient Overlay for Text Readability */}
-            <div className={`absolute inset-0 ${slide.bgClass} opacity-90 mix-blend-multiply`}></div>
+            {/* Pattern Overlay (Optional CSS pattern for texture without image) */}
+            <div className="absolute inset-0 opacity-10 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-white to-transparent"></div>
 
             {/* Content */}
             <div className="absolute inset-0 flex items-center">
@@ -72,7 +67,7 @@ const HeroCarousel: React.FC = () => {
                   </p>
                   <Link 
                     to={slide.link}
-                    className="inline-block bg-brand-yellow text-brand-darkBlue px-6 py-3 md:px-8 md:py-4 rounded-full font-bold text-sm md:text-lg hover:scale-105 transition-transform shadow-lg uppercase"
+                    className="inline-block bg-white text-brand-darkBlue px-6 py-3 md:px-8 md:py-4 rounded-full font-bold text-sm md:text-lg hover:scale-105 transition-transform shadow-lg uppercase"
                   >
                     {slide.buttonText}
                   </Link>

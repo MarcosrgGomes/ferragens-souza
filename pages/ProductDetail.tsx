@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
-import { PRODUCTS } from '../services/mockData';
+import { dataService } from '../services/dataService';
+import { Product } from '../types';
 import { useCart } from '../context/CartContext';
-import { ShoppingCart, ArrowLeft, Minus, Plus, CheckCircle, AlertTriangle, CreditCard, Banknote, FileText } from 'lucide-react';
+import { ShoppingCart, ArrowLeft, Minus, Plus, CheckCircle, AlertTriangle, CreditCard, Banknote, FileText, Loader2, Package } from 'lucide-react';
 import ProductCard from '../components/ProductCard';
 
 const ProductDetail: React.FC = () => {
@@ -10,8 +11,41 @@ const ProductDetail: React.FC = () => {
   const navigate = useNavigate();
   const { addToCart } = useCart();
   const [quantity, setQuantity] = useState(1);
+  const [product, setProduct] = useState<Product | undefined>(undefined);
+  const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
 
-  const product = PRODUCTS.find(p => p.id === Number(id));
+  useEffect(() => {
+    const loadProduct = async () => {
+      if (!id) return;
+      setLoading(true);
+      try {
+        const foundProduct = await dataService.getProductById(Number(id));
+        setProduct(foundProduct);
+
+        if (foundProduct) {
+          const allProducts = await dataService.getProducts();
+          const related = allProducts
+            .filter(p => p.category === foundProduct.category && p.id !== foundProduct.id)
+            .slice(0, 4);
+          setRelatedProducts(related);
+        }
+      } catch (error) {
+        console.error("Error loading product", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadProduct();
+  }, [id]);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center">
+        <Loader2 className="w-10 h-10 text-brand-orange animate-spin" />
+      </div>
+    );
+  }
 
   if (!product) {
     return (
@@ -28,14 +62,8 @@ const ProductDetail: React.FC = () => {
     addToCart(product, quantity);
   };
 
-  // Simulação de preço "De/Por" para parecer varejo
-  const listPrice = product.price * 1.15; // Preço "original" 15% maior
+  const listPrice = product.price * 1.15;
   const parcelPrice = listPrice / 3;
-
-  // Get related products (same category, excluding current)
-  const relatedProducts = PRODUCTS
-    .filter(p => p.category === product.category && p.id !== product.id)
-    .slice(0, 4);
 
   return (
     <div className="container mx-auto px-4 py-8">
@@ -45,19 +73,25 @@ const ProductDetail: React.FC = () => {
 
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden mb-8">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 p-6 md:p-10">
-          {/* Image */}
-          <div className="aspect-square bg-white rounded-lg overflow-hidden border border-gray-100 p-4 flex items-center justify-center relative">
-            <img 
-              src={product.image} 
-              alt={product.name} 
-              className="w-full h-full object-contain max-h-[400px]"
-            />
+          {/* Image Placeholder */}
+          <div className="aspect-square bg-gray-50 rounded-lg overflow-hidden border border-gray-100 p-4 flex items-center justify-center relative group">
+             {product.image ? (
+                <img 
+                  src={product.image} 
+                  alt={product.name} 
+                  className="w-full h-full object-contain max-h-[400px]"
+                />
+             ) : (
+                <div className="text-gray-200">
+                  <Package className="w-32 h-32 md:w-48 md:h-48" />
+                </div>
+             )}
+            
             {product.featured && (
                <span className="absolute top-4 left-4 bg-brand-orange text-white text-xs font-bold px-2 py-1 rounded shadow-sm">
                  OFERTA
                </span>
             )}
-            {/* Marca Badge */}
             {product.brand && (
                 <span className="absolute bottom-4 right-4 bg-gray-100 text-gray-600 text-xs font-bold px-3 py-1 rounded-full border border-gray-200 uppercase tracking-wide">
                   {product.brand}
@@ -92,9 +126,8 @@ const ProductDetail: React.FC = () => {
               )}
             </div>
 
-            {/* Price Box - KaBuM Style */}
+            {/* Price Box */}
             <div className="bg-gray-50 p-6 rounded-lg mb-6 border border-gray-100 relative overflow-hidden">
-               {/* Decorative background accent */}
                <div className="absolute top-0 right-0 w-16 h-16 bg-brand-orange/5 rounded-bl-full"></div>
 
                <div className="flex items-center gap-2 mb-1">
@@ -165,7 +198,7 @@ const ProductDetail: React.FC = () => {
         </div>
       </div>
 
-      {/* Technical Specifications (New) */}
+      {/* Technical Specifications */}
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6 md:p-8 mb-12">
         <h2 className="text-lg font-bold text-slate-900 mb-6 flex items-center gap-2 border-b border-gray-100 pb-4">
           <FileText className="w-5 h-5 text-brand-blue" />

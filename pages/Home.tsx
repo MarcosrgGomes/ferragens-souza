@@ -1,19 +1,50 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { CATEGORIES, PRODUCTS } from '../services/mockData';
+import { dataService } from '../services/dataService';
+import { Product, Category } from '../types';
 import ProductCarousel from '../components/ProductCarousel';
 import HeroCarousel from '../components/HeroCarousel';
 import { 
   Truck, CreditCard, ShieldCheck, Ticket, 
   Store, Building2, Smartphone, Briefcase, 
-  ChevronRight, ArrowRight, Tag, Zap 
+  ChevronRight, ArrowRight, Tag, Zap, Loader2, Package, Layers
 } from 'lucide-react';
 
 const HomePage: React.FC = () => {
+  const [products, setProducts] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<Category[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const loadData = async () => {
+      try {
+        const [prodData, catData] = await Promise.all([
+          dataService.getProducts(),
+          dataService.getCategories()
+        ]);
+        setProducts(prodData);
+        setCategories(catData);
+      } catch (error) {
+        console.error("Failed to load data", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    loadData();
+  }, []);
+
   // Logic for different product sections
-  const bestOffers = PRODUCTS.filter(p => p.price < 100);
-  const newReleases = PRODUCTS.filter(p => p.id % 2 === 0); // Mock logic for new releases
-  const trending = PRODUCTS.slice(0, 8); // Mock trending
+  const bestOffers = products.filter(p => p.price < 100);
+  const newReleases = products.filter(p => p.id % 2 === 0); 
+  const trending = products.slice(0, 8); 
+
+  if (loading) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-white">
+        <Loader2 className="w-10 h-10 text-brand-orange animate-spin" />
+      </div>
+    );
+  }
 
   return (
     <div className="bg-white pb-10">
@@ -23,7 +54,7 @@ const HomePage: React.FC = () => {
 
       <div className="container mx-auto px-4">
 
-        {/* 2. Mini Banners Strip (Cashback/Frete/Coupons) */}
+        {/* 2. Mini Banners Strip */}
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-3 mt-6 mb-8">
           {[
             { title: "10% Cashback", sub: "em tudo", color: "bg-purple-600", btn: "CONFIRA" },
@@ -40,36 +71,36 @@ const HomePage: React.FC = () => {
                <div className="mt-1 bg-white/20 px-2 py-0.5 rounded text-[9px] font-bold uppercase relative z-10 group-hover:bg-white group-hover:text-gray-900 transition-colors">
                  {item.btn}
                </div>
-               {/* Decorative Circle */}
                <div className="absolute -right-4 -bottom-4 w-16 h-16 bg-white/10 rounded-full"></div>
              </Link>
           ))}
         </div>
 
-        {/* 3. Navegue por categorias (Visual Grid COMPACT) */}
+        {/* 3. Navegue por categorias */}
         <section className="mb-10">
           <div className="flex justify-between items-end mb-4">
             <h2 className="text-xl font-bold text-slate-800">Navegue por categorias</h2>
-            <div className="flex gap-2">
-              {/* Optional Navigation arrows could go here */}
-            </div>
           </div>
           
           <div className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 lg:grid-cols-9 gap-3">
-            {CATEGORIES.map(cat => (
+            {categories.map(cat => (
               <Link 
                 key={cat.id} 
                 to={`/produtos?categoria=${cat.id}`}
                 className="group flex flex-col gap-1.5"
               >
-                <div className="overflow-hidden rounded-lg aspect-square bg-gray-50 relative border border-gray-100">
-                  <img 
-                    src={cat.image} 
-                    alt={cat.name}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  {/* Overlay on hover */}
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/10 transition-colors"></div>
+                <div className="overflow-hidden rounded-lg aspect-square bg-gray-50 relative border border-gray-100 flex items-center justify-center group-hover:bg-gray-100 transition-colors">
+                  {cat.image ? (
+                    <img 
+                      src={cat.image} 
+                      alt={cat.name}
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                  ) : (
+                    <Layers className="w-8 h-8 text-gray-300 group-hover:text-brand-blue transition-colors" />
+                  )}
+                  {/* Overlay */}
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/5 transition-colors"></div>
                 </div>
                 <span className="text-xs font-medium text-slate-700 group-hover:text-brand-blue text-center leading-tight truncate px-1">
                   {cat.name}
@@ -79,7 +110,7 @@ const HomePage: React.FC = () => {
           </div>
         </section>
 
-        {/* 4. Melhores ofertas (Carousel) */}
+        {/* 4. Melhores ofertas */}
         <div className="bg-gray-50 -mx-4 px-4 py-8 mb-8">
            <div className="container mx-auto">
               <div className="mb-4">
@@ -94,7 +125,7 @@ const HomePage: React.FC = () => {
            </div>
         </div>
 
-        {/* 5. Parte de Anúncios / Clube do App */}
+        {/* 5. Anúncios */}
         <section className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-12">
           <div className="bg-gray-100 rounded-lg p-6 flex flex-col justify-center items-start relative overflow-hidden h-48 md:h-56">
              <div className="absolute right-0 bottom-0 opacity-10">
@@ -130,7 +161,7 @@ const HomePage: React.FC = () => {
           </div>
         </section>
 
-        {/* 6. Lançamentos Imperdíveis */}
+        {/* 6. Lançamentos */}
         <section className="mb-12">
           <div className="flex items-center gap-2 mb-4">
              <h2 className="text-xl font-bold text-slate-800">Lançamentos imperdíveis</h2>
@@ -143,7 +174,7 @@ const HomePage: React.FC = () => {
           />
         </section>
 
-        {/* 7. Exclusividade para você (Service Grid) */}
+        {/* 7. Exclusividade */}
         <section className="mb-12">
           <h2 className="text-xl font-bold text-slate-800 mb-4">Exclusividade para você</h2>
           <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-4 gap-3">
@@ -166,7 +197,7 @@ const HomePage: React.FC = () => {
           </div>
         </section>
 
-        {/* 8. Todo mundo está de olho (Trending) */}
+        {/* 8. Trending */}
         <section className="mb-12">
           <h2 className="text-xl font-bold text-slate-800 mb-4 flex items-center gap-2">
             Todo mundo está de olho
@@ -179,7 +210,7 @@ const HomePage: React.FC = () => {
           />
         </section>
 
-        {/* 9. Marca Própria Banner */}
+        {/* 9. Marca Própria */}
         <div className="bg-slate-900 text-white rounded-lg p-6 md:p-10 mb-8 text-center relative overflow-hidden">
           <h2 className="text-2xl md:text-4xl font-black mb-2 tracking-tighter">FERRAGENS<span className="text-gray-400 font-light">ORIGINALS</span></h2>
           <p className="text-gray-400 max-w-xl mx-auto mb-6 text-sm">Qualidade garantida e preço justo.</p>

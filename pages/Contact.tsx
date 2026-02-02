@@ -54,17 +54,13 @@ const Contact: React.FC = () => {
           </div>
         </div>
 
-        {/* Mock Map */}
-        <div className="bg-gray-200 rounded-xl overflow-hidden h-80 md:h-auto relative">
-           <img 
-             src="https://picsum.photos/id/10/800/800" 
-             alt="Mapa da Localização" 
-             className="w-full h-full object-cover opacity-60"
-           />
+        {/* Mock Map Placeholder */}
+        <div className="bg-gray-100 rounded-xl overflow-hidden h-80 md:h-auto relative flex items-center justify-center border border-gray-200">
            <div className="absolute inset-0 flex items-center justify-center">
              <div className="bg-white p-4 rounded-lg shadow-lg flex flex-col items-center">
                 <MapPin className="w-8 h-8 text-brand-orange mb-2 animate-bounce" />
                 <span className="font-bold text-brand-darkBlue">Estamos Aqui!</span>
+                <span className="text-xs text-gray-400 mt-1">(Mapa Indisponível)</span>
              </div>
            </div>
         </div>
