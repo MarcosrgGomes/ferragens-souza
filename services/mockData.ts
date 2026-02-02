@@ -5,13 +5,13 @@ export const CATEGORIES: Category[] = [
     id: 'eletrica', 
     name: 'Elétrica', 
     icon: 'Zap',
-    image: 'https://images.unsplash.com/photo-1558317374-a354d5f6d4da?q=80&w=400&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1555963966-b7ae5404b6ed?q=80&w=400&auto=format&fit=crop'
   },
   { 
     id: 'iluminacao', 
     name: 'Iluminação', 
     icon: 'Lightbulb',
-    image: 'https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=400&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?q=80&w=400&auto=format&fit=crop'
   },
   { 
     id: 'ferramentas', 
@@ -35,7 +35,7 @@ export const CATEGORIES: Category[] = [
     id: 'construcao', 
     name: 'Construção', 
     icon: 'BrickWall',
-    image: 'https://images.unsplash.com/photo-1518709779341-56cf4535e94b?q=80&w=400&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1534237710431-e2fc698436d0?q=80&w=400&auto=format&fit=crop'
   },
   { 
     id: 'jardinagem', 
@@ -79,7 +79,8 @@ export const PRODUCTS: Product[] = [
       'Voltagem Máx': '750V',
       'Isolação': 'PVC Antichama BWF'
     },
-    image: 'https://images.unsplash.com/photo-1558317374-a354d5f6d4da?q=80&w=400&auto=format&fit=crop',
+    // Imagem colorida de fios elétricos
+    image: 'https://images.unsplash.com/photo-1544724569-5f546fd6dd2d?q=80&w=600&auto=format&fit=crop',
     available: true,
     featured: true
   },
@@ -96,7 +97,8 @@ export const PRODUCTS: Product[] = [
       'Curva': 'C (Cargas gerais)',
       'Capacidade': '3kA'
     },
-    image: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?q=80&w=400&auto=format&fit=crop', 
+    // Imagem de painel elétrico com disjuntores (contraste maior)
+    image: 'https://images.unsplash.com/photo-1555963966-b7ae5404b6ed?q=80&w=600&auto=format&fit=crop', 
     available: true
   },
   {
@@ -112,7 +114,8 @@ export const PRODUCTS: Product[] = [
       'Espessura': '0.19mm',
       'Uso': 'Profissional'
     },
-    image: 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?q=80&w=400&auto=format&fit=crop',
+    // Imagem de reparo elétrico com fita preta
+    image: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=600&auto=format&fit=crop',
     available: true
   },
 
@@ -130,7 +133,8 @@ export const PRODUCTS: Product[] = [
       'Soquete': 'E27 (Padrão)',
       'Vida Útil': '25.000h'
     },
-    image: 'https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=400&auto=format&fit=crop',
+    // Lâmpada acesa (fundo escuro/colorido)
+    image: 'https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=600&auto=format&fit=crop',
     available: true,
     featured: true
   },
@@ -147,7 +151,8 @@ export const PRODUCTS: Product[] = [
       'Cor Luz': 'Branco Frio',
       'Carcaça': 'Alumínio Preto'
     },
-    image: 'https://images.unsplash.com/photo-1563452619217-bc277c02e5b1?q=80&w=400&auto=format&fit=crop',
+    // Luz externa à noite
+    image: 'https://images.unsplash.com/photo-1563452619217-bc277c02e5b1?q=80&w=600&auto=format&fit=crop',
     available: true
   },
 
@@ -165,7 +170,8 @@ export const PRODUCTS: Product[] = [
       'Uso': 'Área Externa/Tanque',
       'Garantia': '10 anos'
     },
-    image: 'https://images.unsplash.com/photo-1585909696092-c07a09d6f657?q=80&w=400&auto=format&fit=crop',
+    // Torneira com água
+    image: 'https://images.unsplash.com/photo-1585909696092-c07a09d6f657?q=80&w=600&auto=format&fit=crop',
     available: true
   },
   {
@@ -181,7 +187,8 @@ export const PRODUCTS: Product[] = [
       'Pressão': '7,5 kgf/cm²',
       'Norma': 'NBR 5648'
     },
-    image: 'https://images.unsplash.com/photo-1599815049929-17849e52570d?q=80&w=400&auto=format&fit=crop', 
+    // Tubulações industriais/construção
+    image: 'https://images.unsplash.com/photo-1599815049929-17849e52570d?q=80&w=600&auto=format&fit=crop', 
     available: true,
     featured: true
   },
@@ -198,7 +205,8 @@ export const PRODUCTS: Product[] = [
       'Camadas': '3',
       'Altura': '0,96m'
     },
-    image: 'https://images.unsplash.com/photo-1533630768394-375107f9c80a?q=80&w=400&auto=format&fit=crop',
+    // Tanque azul plástico
+    image: 'https://images.unsplash.com/photo-1533630768394-375107f9c80a?q=80&w=600&auto=format&fit=crop',
     available: false 
   },
 
@@ -216,7 +224,8 @@ export const PRODUCTS: Product[] = [
       'Cabo': 'Madeira Eucalipto',
       'Peso': '0.65 kg'
     },
-    image: 'https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?q=80&w=400&auto=format&fit=crop',
+    // Ferramenta em uso ou bancada
+    image: 'https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?q=80&w=600&auto=format&fit=crop',
     available: true
   },
   {
@@ -232,7 +241,8 @@ export const PRODUCTS: Product[] = [
       'Material': 'Cromo Vanádio',
       'Cabo': 'Grip Emborrachado'
     },
-    image: 'https://images.unsplash.com/photo-1530124566582-a618bc2615dc?q=80&w=400&auto=format&fit=crop',
+    // Chaves de fenda variadas
+    image: 'https://images.unsplash.com/photo-1530124566582-a618bc2615dc?q=80&w=600&auto=format&fit=crop',
     available: true,
     featured: true
   },
@@ -249,7 +259,8 @@ export const PRODUCTS: Product[] = [
       'Rotação': '3.100 min-1',
       'Impacto': 'Sim'
     },
-    image: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?q=80&w=400&auto=format&fit=crop',
+    // Furadeira em ação
+    image: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?q=80&w=600&auto=format&fit=crop',
     available: true
   },
 
@@ -267,7 +278,8 @@ export const PRODUCTS: Product[] = [
       'Pressão': 'Até 10 bar',
       'Cor': 'Verde'
     },
-    image: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?q=80&w=400&auto=format&fit=crop',
+    // Mangueira verde em jardim
+    image: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?q=80&w=600&auto=format&fit=crop',
     available: true,
     featured: true
   },
@@ -286,7 +298,8 @@ export const PRODUCTS: Product[] = [
       'Chaves': '2 unidades',
       'Haste': 'Média'
     },
-    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=400&auto=format&fit=crop',
+    // Cadeado fechando portão
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=600&auto=format&fit=crop',
     available: true
   },
 
@@ -304,7 +317,8 @@ export const PRODUCTS: Product[] = [
       'Uso': 'Interior/Exterior',
       'Rendimento': 'Até 380m² por demão'
     },
-    image: 'https://images.unsplash.com/photo-1562259949-e8e7689d7828?q=80&w=400&auto=format&fit=crop',
+    // Balde de tinta ou rolo com tinta
+    image: 'https://images.unsplash.com/photo-1562259949-e8e7689d7828?q=80&w=600&auto=format&fit=crop',
     available: true,
     featured: true
   },
@@ -321,7 +335,8 @@ export const PRODUCTS: Product[] = [
       'Indicação': 'Tinta Acrílica/Látex',
       'Peças': '3'
     },
-    image: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=400&auto=format&fit=crop',
+    // Pintando parede
+    image: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=600&auto=format&fit=crop',
     available: true
   },
 
@@ -339,7 +354,8 @@ export const PRODUCTS: Product[] = [
       'Embalagem': 'Saco Papel',
       'Norma': 'NBR 11578'
     },
-    image: 'https://images.unsplash.com/photo-1518709779341-56cf4535e94b?q=80&w=400&auto=format&fit=crop', 
+    // Textura de concreto/construção
+    image: 'https://images.unsplash.com/photo-1518709779341-56cf4535e94b?q=80&w=600&auto=format&fit=crop', 
     available: true
   },
   {
@@ -355,7 +371,8 @@ export const PRODUCTS: Product[] = [
       'Parafusos': 'Philips Chipboard',
       'Acompanha': 'Maleta Plástica'
     },
-    image: 'https://images.unsplash.com/photo-1581147036324-c17ac41dfa6c?q=80&w=400&auto=format&fit=crop',
+    // Parafusos variados
+    image: 'https://images.unsplash.com/photo-1581147036324-c17ac41dfa6c?q=80&w=600&auto=format&fit=crop',
     available: true
   }
 ];
