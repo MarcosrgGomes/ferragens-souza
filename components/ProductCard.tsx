@@ -32,11 +32,11 @@ const ProductCard: React.FC<ProductCardProps> = ({ product }) => {
     <div className="group bg-white rounded-md border border-gray-100 hover:border-brand-blue/30 shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col h-full relative overflow-hidden text-sm">
       
       {/* Link wrapping the image area - Height reduced */}
-      <Link to={`/produto/${product.id}`} className="block relative h-28 md:h-36 overflow-hidden bg-white p-2">
+      <Link to={`/produto/${product.id}`} className="block relative h-28 md:h-36 overflow-hidden bg-gray-50 p-2">
         <img 
           src={product.image} 
           alt={product.name} 
-          className="w-full h-full object-contain group-hover:scale-105 transition-transform duration-500 mix-blend-multiply"
+          className="w-full h-full object-contain mix-blend-normal group-hover:scale-105 transition-transform duration-500"
           loading="lazy"
         />
         
