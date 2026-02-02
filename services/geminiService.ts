@@ -1,10 +1,24 @@
 import { GoogleGenAI } from "@google/genai";
 import { PRODUCTS } from './mockData';
 
-// API Key must be obtained exclusively from process.env.API_KEY
-const ai = new GoogleGenAI({ apiKey: process.env.API_KEY });
+// Inicialização segura: Verifica se a chave existe antes de tentar criar a instância
+// Isso previne que o app inteiro quebre (tela branca) se a chave não estiver configurada
+const apiKey = process.env.API_KEY;
+let ai: GoogleGenAI | null = null;
+
+if (apiKey) {
+  try {
+    ai = new GoogleGenAI({ apiKey });
+  } catch (error) {
+    console.error("Erro ao inicializar Gemini:", error);
+  }
+}
 
 export const getAssistantResponse = async (userQuery: string): Promise<string> => {
+    if (!ai) {
+        return "O assistente está indisponível no momento (Chave de API não configurada). Por favor, entre em contato via WhatsApp.";
+    }
+
     // Contexto do catálogo para a IA
     const productListString = PRODUCTS.map(p => `- ${p.name} (R$ ${p.price.toFixed(2)})`).join('\n');
 
@@ -23,13 +37,13 @@ export const getAssistantResponse = async (userQuery: string): Promise<string> =
 
     try {
         const response = await ai.models.generateContent({
-            model: 'gemini-3-flash-preview',
+            model: 'gemini-2.5-flash-latest',
             contents: prompt,
         });
 
         return response.text || "Não entendi, pode repetir?";
     } catch (error) {
         console.error("Gemini API Error:", error);
-        return "Erro técnico no assistente. Tente novamente mais tarde.";
+        return "Desculpe, tive um problema técnico. Tente novamente em instantes.";
     }
 };
