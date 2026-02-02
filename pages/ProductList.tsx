@@ -2,7 +2,7 @@ import React, { useMemo, useState, useEffect } from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { PRODUCTS, CATEGORIES } from '../services/mockData';
 import ProductCard from '../components/ProductCard';
-import { Filter, X, ChevronRight, SlidersHorizontal, ArrowUpDown, Check, Search, ChevronDown, ChevronUp } from 'lucide-react';
+import { Filter, X, ChevronRight, SlidersHorizontal, ArrowUpDown, Check } from 'lucide-react';
 
 type SortOption = 'relevance' | 'price_asc' | 'price_desc' | 'name_asc';
 
@@ -10,23 +10,29 @@ const ProductList: React.FC = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   const categoryFilter = searchParams.get('categoria');
   const searchFilter = searchParams.get('search');
-
+  
   // Local Filter States
   const [isMobileFiltersOpen, setIsMobileFiltersOpen] = useState(false);
-  
-  // States for Price Inputs (Local only)
   const [localMinPrice, setLocalMinPrice] = useState('');
   const [localMaxPrice, setLocalMaxPrice] = useState('');
-
-  // Actual applied price filter
+  const [selectedBrands, setSelectedBrands] = useState<string[]>([]);
   const [appliedPriceRange, setAppliedPriceRange] = useState<{min: number, max: number}>({ min: 0, max: Infinity });
-  
   const [sortOption, setSortOption] = useState<SortOption>('relevance');
 
-  // Sync inputs when filters are cleared externally or mostly for initial load logic
+  // Derive available brands safely
+  const availableBrands = useMemo(() => {
+    const relevantProducts = categoryFilter 
+        ? PRODUCTS.filter(p => p.category === categoryFilter)
+        : PRODUCTS;
+    // Filter Boolean ensures we don't get undefined values
+    const brands = Array.from(new Set(relevantProducts.map(p => p.brand).filter((b): b is string => !!b)));
+    return brands.sort();
+  }, [categoryFilter]);
+
+  // Sync selected brands when URL changes or category changes (reset)
   useEffect(() => {
-     // Reset local inputs if applied range is reset (optional behavior, keeping simple)
-  }, [appliedPriceRange]);
+    setSelectedBrands([]);
+  }, [categoryFilter]);
 
   // Handler to Apply Price Filter
   const applyPriceFilter = () => {
@@ -36,22 +42,32 @@ const ProductList: React.FC = () => {
     setIsMobileFiltersOpen(false);
   };
 
+  const toggleBrand = (brand: string) => {
+    setSelectedBrands(prev => 
+      prev.includes(brand) ? prev.filter(b => b !== brand) : [...prev, brand]
+    );
+  };
+
   // Filter Logic
   const filteredProducts = useMemo(() => {
     let result = PRODUCTS.filter(p => {
       // Category Filter
       const matchCategory = categoryFilter ? p.category === categoryFilter : true;
       
-      // Search Filter
+      // Search Filter (Safe check for brand)
       const matchSearch = searchFilter 
         ? p.name.toLowerCase().includes(searchFilter.toLowerCase()) || 
-          p.description.toLowerCase().includes(searchFilter.toLowerCase())
+          p.description.toLowerCase().includes(searchFilter.toLowerCase()) ||
+          (p.brand && p.brand.toLowerCase().includes(searchFilter.toLowerCase()))
         : true;
 
-      // Price Filter (Uses applied state, not input state)
+      // Price Filter
       const matchPrice = p.price >= appliedPriceRange.min && p.price <= appliedPriceRange.max;
 
-      return matchCategory && matchSearch && matchPrice;
+      // Brand Filter (Safe check)
+      const matchBrand = selectedBrands.length > 0 ? (p.brand ? selectedBrands.includes(p.brand) : false) : true;
+
+      return matchCategory && matchSearch && matchPrice && matchBrand;
     });
 
     // Sorting Logic
@@ -60,21 +76,21 @@ const ProductList: React.FC = () => {
         case 'price_asc': return a.price - b.price;
         case 'price_desc': return b.price - a.price;
         case 'name_asc': return a.name.localeCompare(b.name);
-        default: return 0; // relevance (id or original order)
+        default: return 0;
       }
     });
-  }, [categoryFilter, searchFilter, appliedPriceRange, sortOption]);
+  }, [categoryFilter, searchFilter, appliedPriceRange, sortOption, selectedBrands]);
 
   const activeCategoryName = categoryFilter 
     ? CATEGORIES.find(c => c.id === categoryFilter)?.name 
     : 'Todos os Produtos';
 
-  // Handler to clear all filters
   const clearFilters = () => {
     setSearchParams({});
     setLocalMinPrice('');
     setLocalMaxPrice('');
     setAppliedPriceRange({ min: 0, max: Infinity });
+    setSelectedBrands([]);
     setSortOption('relevance');
     setIsMobileFiltersOpen(false);
   };
@@ -94,7 +110,7 @@ const ProductList: React.FC = () => {
         <h3 className="font-bold text-slate-800 mb-4 flex items-center gap-2 text-sm uppercase tracking-wide">
           Departamentos
         </h3>
-        <div className="max-h-[300px] overflow-y-auto pr-2 [&::-webkit-scrollbar]:w-1 [&::-webkit-scrollbar-thumb]:bg-gray-300 [&::-webkit-scrollbar-track]:bg-gray-100">
+        <div className="max-h-[300px] overflow-y-auto pr-2 custom-scrollbar">
           <ul className="space-y-1">
             <li>
               <button
@@ -127,6 +143,31 @@ const ProductList: React.FC = () => {
           </ul>
         </div>
       </div>
+
+      {/* Brands Filter */}
+      {availableBrands.length > 0 && (
+        <div className="border-t border-gray-100 pt-6">
+          <h3 className="font-bold text-slate-800 mb-4 text-sm uppercase tracking-wide">Marcas</h3>
+          <div className="space-y-2 max-h-[200px] overflow-y-auto custom-scrollbar">
+            {availableBrands.map(brand => (
+              <label key={brand} className="flex items-center gap-3 cursor-pointer group">
+                <div className="relative flex items-center">
+                  <input 
+                    type="checkbox" 
+                    className="peer appearance-none w-5 h-5 border-2 border-gray-300 rounded checked:bg-brand-orange checked:border-brand-orange transition-colors"
+                    checked={selectedBrands.includes(brand)}
+                    onChange={() => toggleBrand(brand)}
+                  />
+                  <Check className="w-3 h-3 text-white absolute left-1 top-1 opacity-0 peer-checked:opacity-100 pointer-events-none" />
+                </div>
+                <span className={`text-sm group-hover:text-brand-orange transition-colors ${selectedBrands.includes(brand) ? 'font-semibold text-slate-800' : 'text-slate-600'}`}>
+                  {brand}
+                </span>
+              </label>
+            ))}
+          </div>
+        </div>
+      )}
 
       {/* Price Range */}
       <div className="border-t border-gray-100 pt-6">
@@ -228,7 +269,7 @@ const ProductList: React.FC = () => {
         </button>
 
         {/* Desktop Active Filters Display */}
-        <div className="hidden md:flex items-center gap-2 text-sm text-slate-600">
+        <div className="hidden md:flex flex-wrap items-center gap-2 text-sm text-slate-600">
           {(appliedPriceRange.min > 0 || appliedPriceRange.max < Infinity) && (
              <div className="flex items-center gap-2 bg-slate-100 text-slate-800 px-3 py-1.5 rounded-full border border-slate-200 font-medium text-xs">
                <span>
@@ -243,6 +284,12 @@ const ProductList: React.FC = () => {
                }} className="hover:text-red-500 ml-1"><X className="w-3 h-3" /></button>
              </div>
           )}
+          {selectedBrands.map(brand => (
+             <div key={brand} className="flex items-center gap-2 bg-slate-100 text-slate-800 px-3 py-1.5 rounded-full border border-slate-200 font-medium text-xs">
+               <span>{brand}</span>
+               <button onClick={() => toggleBrand(brand)} className="hover:text-red-500 ml-1"><X className="w-3 h-3" /></button>
+             </div>
+          ))}
         </div>
 
         {/* Sort Dropdown */}
@@ -290,7 +337,7 @@ const ProductList: React.FC = () => {
               </div>
               <h3 className="text-xl font-bold text-slate-700">Nenhum produto encontrado</h3>
               <p className="text-slate-500 mt-2 max-w-md mx-auto px-4">
-                Não encontramos resultados com esses filtros. Tente reduzir o preço mínimo ou mudar a categoria.
+                Não encontramos resultados com esses filtros. Tente reduzir o preço mínimo, remover filtros de marca ou mudar a categoria.
               </p>
               <button 
                 onClick={clearFilters} 

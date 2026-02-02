@@ -5,25 +5,25 @@ export const CATEGORIES: Category[] = [
     id: 'eletrica', 
     name: 'Elétrica', 
     icon: 'Zap',
-    image: 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?q=80&w=400&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1555963966-b7ae5404b6ed?q=80&w=400&auto=format&fit=crop'
   },
   { 
     id: 'iluminacao', 
     name: 'Iluminação', 
     icon: 'Lightbulb',
-    image: 'https://images.unsplash.com/photo-1513506003013-d8cdd3c9a469?q=80&w=400&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?q=80&w=400&auto=format&fit=crop'
   },
   { 
     id: 'ferramentas', 
     name: 'Ferramentas', 
     icon: 'Hammer',
-    image: 'https://images.unsplash.com/photo-1581147036324-c17ac41dfa6c?q=80&w=400&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1530124566582-a618bc2615dc?q=80&w=400&auto=format&fit=crop'
   },
   { 
     id: 'hidraulica', 
     name: 'Hidráulica', 
     icon: 'Droplets',
-    image: 'https://images.unsplash.com/photo-1606168096263-cf9d9c223a27?q=80&w=400&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1585909696092-c07a09d6f657?q=80&w=400&auto=format&fit=crop'
   },
   { 
     id: 'pintura', 
@@ -35,13 +35,13 @@ export const CATEGORIES: Category[] = [
     id: 'construcao', 
     name: 'Construção', 
     icon: 'BrickWall',
-    image: 'https://images.unsplash.com/photo-1518709779341-56cf4535e94b?q=80&w=400&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1534237710431-e2fc698436d0?q=80&w=400&auto=format&fit=crop'
   },
   { 
     id: 'jardinagem', 
     name: 'Jardinagem', 
     icon: 'Sprout',
-    image: 'https://images.unsplash.com/photo-1599687267812-35905d212787?q=80&w=400&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?q=80&w=400&auto=format&fit=crop'
   },
   { 
     id: 'seguranca', 
@@ -53,7 +53,7 @@ export const CATEGORIES: Category[] = [
     id: 'fixacao', 
     name: 'Fixação', 
     icon: 'Wrench',
-    image: 'https://images.unsplash.com/photo-1530124566582-a618bc2615dc?q=80&w=400&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1581147036324-c17ac41dfa6c?q=80&w=400&auto=format&fit=crop'
   },
   { 
     id: 'utilidades', 
@@ -67,165 +67,260 @@ export const PRODUCTS: Product[] = [
   // --- Elétrica ---
   {
     id: 1,
-    name: 'Fio Flexível 2.5mm Rolo 100m Sil',
-    price: 189.90,
+    name: 'Cabo Flexível 2.5mm 750V Rolo 100m',
+    price: 229.90, // Preço médio de mercado para marca boa (Sil/Corfio)
     category: 'eletrica',
-    description: 'Fio de cobre flexível antichama, ideal para tomadas residenciais. Certificado Inmetro.',
+    brand: 'Sil',
+    description: 'Fio de cobre flexível antichama, ideal para tomadas residenciais (10A/20A). Produto certificado pelo Inmetro. Flexibilidade classe 5.',
+    specs: {
+      'Bitola': '2.5mm',
+      'Comprimento': '100 metros',
+      'Material': 'Cobre',
+      'Voltagem Máx': '750V',
+      'Isolação': 'PVC Antichama BWF'
+    },
     image: 'https://images.unsplash.com/photo-1558317374-a354d5f6d4da?q=80&w=400&auto=format&fit=crop',
     available: true,
     featured: true
   },
   {
     id: 2,
-    name: 'Disjuntor Unipolar 20A DIN Siemens',
-    price: 18.50,
+    name: 'Disjuntor Unipolar DIN 20A Curva C',
+    price: 22.50, // Preço Siemens/Steck
     category: 'eletrica',
-    description: 'Proteção essencial para seu circuito elétrico. Padrão DIN de alta qualidade.',
-    image: 'https://images.unsplash.com/photo-1574686470003-88746dc4943b?q=80&w=400&auto=format&fit=crop',
+    brand: 'Siemens',
+    description: 'Disjuntor termomagnético para proteção de circuitos. Modelo DIN (branco), fácil encaixe em trilhos.',
+    specs: {
+      'Amperagem': '20A',
+      'Pólos': '1 (Unipolar)',
+      'Curva': 'C (Cargas gerais)',
+      'Capacidade': '3kA'
+    },
+    image: 'https://images.unsplash.com/photo-1544724569-5f546fd6dd2d?q=80&w=400&auto=format&fit=crop', // Imagem de painel elétrico
     available: true
   },
   {
     id: 3,
-    name: 'Fita Isolante 20m 3M Imperial',
-    price: 9.90,
+    name: 'Fita Isolante 33+ Profissional 20m',
+    price: 24.90, // Preço da 3M original
     category: 'eletrica',
-    description: 'Alta aderência e flexibilidade. Uso geral e profissional.',
-    image: 'https://images.unsplash.com/photo-1616423661583-0498b965f80b?q=80&w=400&auto=format&fit=crop',
+    brand: '3M',
+    description: 'A melhor fita do mercado. Alta aderência, flexibilidade e memória elástica. Suporta até 90°C.',
+    specs: {
+      'Comprimento': '20m',
+      'Largura': '19mm',
+      'Espessura': '0.19mm',
+      'Uso': 'Profissional'
+    },
+    image: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=400&auto=format&fit=crop',
     available: true
   },
 
-  // --- Iluminação (NOVA) ---
+  // --- Iluminação ---
   {
     id: 101,
-    name: 'Lâmpada LED 9W Branca Fria Kit 5un',
-    price: 49.90,
+    name: 'Kit 5 Lâmpadas LED Bulbo 9W Bivolt',
+    price: 39.90, // Preço competitivo de kit
     category: 'iluminacao',
-    description: 'Economize energia com alta luminosidade. Bivolt.',
-    image: 'https://images.unsplash.com/photo-1557438159-51eec7a6c9e8?q=80&w=400&auto=format&fit=crop',
+    brand: 'Avant',
+    description: 'Kit econômico. Luz branca fria (6500K), ideal para cozinhas, escritórios e banheiros. Bivolt automático.',
+    specs: {
+      'Potência': '9W (Substitui 60W)',
+      'Fluxo Luminoso': '810lm',
+      'Soquete': 'E27 (Padrão)',
+      'Vida Útil': '25.000h'
+    },
+    image: 'https://images.unsplash.com/photo-1616165507965-797745778a05?q=80&w=400&auto=format&fit=crop',
     available: true,
     featured: true
   },
   {
     id: 102,
-    name: 'Refletor LED 50W Prova D\'água',
-    price: 75.00,
+    name: 'Refletor LED 50W Holofote IP66',
+    price: 49.90,
     category: 'iluminacao',
-    description: 'Ideal para jardins e fachadas. Proteção IP66.',
-    image: 'https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?q=80&w=400&auto=format&fit=crop',
+    brand: 'Ourolux',
+    description: 'Iluminação potente para áreas externas, jardins e fachadas. Resistente à chuva e poeira (IP66).',
+    specs: {
+      'Potência': '50W',
+      'Proteção': 'IP66',
+      'Cor Luz': 'Branco Frio',
+      'Carcaça': 'Alumínio Preto'
+    },
+    image: 'https://images.unsplash.com/photo-1542461927-948384913867?q=80&w=400&auto=format&fit=crop',
     available: true
   },
 
   // --- Hidráulica ---
   {
     id: 4,
-    name: 'Torneira Jardim Metal 1/2" Esfera',
-    price: 35.00,
+    name: 'Torneira Jardim Esfera Metal 1/2"',
+    price: 35.90, // Preço Deca/Docol de entrada
     category: 'hidraulica',
-    description: 'Torneira resistente para áreas externas e tanque. Acabamento cromado.',
-    image: 'https://images.unsplash.com/photo-1585909696092-c07a09d6f657?q=80&w=400&auto=format&fit=crop',
+    brand: 'Deca',
+    description: 'Alta durabilidade e resistência. Acabamento cromado, sistema de abertura rápida por esfera. Inclui bico.',
+    specs: {
+      'Material': 'Metal',
+      'Rosca': '1/2" (com adaptador 3/4")',
+      'Uso': 'Área Externa/Tanque',
+      'Garantia': '10 anos'
+    },
+    image: 'https://images.unsplash.com/photo-1616400619175-5beda3a17896?q=80&w=400&auto=format&fit=crop',
     available: true
   },
   {
     id: 5,
-    name: 'Cano PVC 25mm Soldável Barra 3m',
-    price: 22.00,
+    name: 'Tubo Soldável PVC 25mm Barra 3m',
+    price: 18.50, // Preço Tigre médio
     category: 'hidraulica',
-    description: 'Tubo para água fria soldável. Tigre ou Amanco (conforme estoque).',
-    image: 'https://images.unsplash.com/photo-1606168096263-cf9d9c223a27?q=80&w=400&auto=format&fit=crop',
+    brand: 'Tigre',
+    description: 'Tubo marrom clássico para água fria. O melhor PVC do mercado, não resseca e solda fácil.',
+    specs: {
+      'Diâmetro': '25mm (3/4")',
+      'Comprimento': '3 metros',
+      'Pressão': '7,5 kgf/cm²',
+      'Norma': 'NBR 5648'
+    },
+    image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=400&auto=format&fit=crop', // Imagem conceitual de canos/obra
     available: true,
     featured: true
+  },
+  {
+    id: 6,
+    name: 'Caixa D\'Água Polietileno 1.000L',
+    price: 369.90, // Preço Fortlev
+    category: 'hidraulica',
+    brand: 'Fortlev',
+    description: 'Tampa com travamento de 1/4 de volta, vedação total contra insetos. Interior liso para facilitar limpeza.',
+    specs: {
+      'Capacidade': '1000 Litros',
+      'Material': 'Polietileno',
+      'Camadas': '3',
+      'Altura': '0,96m'
+    },
+    image: 'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?q=80&w=400&auto=format&fit=crop',
+    available: false // Mantendo indisponível para testar a UI
   },
 
   // --- Ferramentas ---
   {
     id: 7,
-    name: 'Martelo Unha Cabo Madeira 27mm',
-    price: 45.00,
+    name: 'Martelo Unha 27mm Cabo Madeira',
+    price: 45.90, // Preço Tramontina
     category: 'ferramentas',
-    description: 'Cabeça em aço forjado, cabo em madeira envernizada de alta resistência.',
+    brand: 'Tramontina',
+    description: 'Cabeça forjada e temperada em aço especial. Cabo de madeira envernizada fixado com epóxi.',
+    specs: {
+      'Tamanho': '27mm',
+      'Cabeça': 'Aço Carbono',
+      'Cabo': 'Madeira Eucalipto',
+      'Peso': '0.65 kg'
+    },
     image: 'https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?q=80&w=400&auto=format&fit=crop',
     available: true
   },
   {
     id: 8,
-    name: 'Jogo Chave de Fenda e Philips 6 Peças',
-    price: 59.90,
+    name: 'Jogo Chaves Fenda/Philips 6 Peças',
+    price: 79.90, // Jogo completo Tramontina Master
     category: 'ferramentas',
-    description: 'Haste em aço cromo vanádio, ponta imantada e cabo ergonômico.',
+    brand: 'Tramontina',
+    description: 'Haste em aço cromo vanádio (muito mais resistente). Pontas imantadas e cabo ergonômico.',
+    specs: {
+      'Qtd': '6 chaves',
+      'Pontas': '3 Fenda, 3 Philips',
+      'Material': 'Cromo Vanádio',
+      'Cabo': 'Grip Emborrachado'
+    },
     image: 'https://images.unsplash.com/photo-1530124566582-a618bc2615dc?q=80&w=400&auto=format&fit=crop',
     available: true,
     featured: true
   },
   {
     id: 9,
-    name: 'Alicate Universal 8" Isolado',
-    price: 38.90,
+    name: 'Furadeira de Impacto 1/2" 550W GSB',
+    price: 329.90, // Preço Bosch GSB 550
     category: 'ferramentas',
-    description: 'Cabo isolado 1000V, ideal para eletricistas e uso geral.',
-    image: 'https://images.unsplash.com/photo-1586864387789-628af9de8730?q=80&w=400&auto=format&fit=crop',
+    brand: 'Bosch',
+    description: 'Potente e robusta. Ideal para perfurações em concreto, madeira e metal. Acompanha chave de mandril.',
+    specs: {
+      'Potência': '550W',
+      'Mandril': '1/2" (13mm)',
+      'Rotação': '3.100 min-1',
+      'Impacto': 'Sim'
+    },
+    image: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?q=80&w=400&auto=format&fit=crop',
     available: true
   },
 
-  // --- Jardinagem (NOVA) ---
+  // --- Jardinagem ---
   {
     id: 201,
-    name: 'Mangueira Flexível 20m com Esguicho',
-    price: 89.90,
+    name: 'Mangueira Flex 20m com Esguicho',
+    price: 69.90,
     category: 'jardinagem',
-    description: 'Mangueira trançada siliconada, não dobra fácil. Acompanha bico e engate.',
+    brand: 'Tramontina',
+    description: 'Mangueira flexível com tripla camada (PVC + Poliéster). Não dobra facilmente. Kit pronto para usar.',
+    specs: {
+      'Comprimento': '20 metros',
+      'Acessórios': 'Esguicho + Adaptador',
+      'Pressão': 'Até 10 bar',
+      'Cor': 'Verde'
+    },
     image: 'https://images.unsplash.com/photo-1617576683096-00fc8eecb3af?q=80&w=400&auto=format&fit=crop',
     available: true,
     featured: true
   },
-  {
-    id: 202,
-    name: 'Pá de Jardim Pequena Metálica',
-    price: 15.90,
-    category: 'jardinagem',
-    description: 'Ferramenta essencial para plantio e transplante em vasos.',
-    image: 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?q=80&w=400&auto=format&fit=crop',
-    available: true
-  },
 
-  // --- Segurança (NOVA) ---
+  // --- Segurança ---
   {
     id: 301,
     name: 'Cadeado 35mm Latão Maciço',
-    price: 32.00,
+    price: 36.90, // Preço Pado/Papaiz
     category: 'seguranca',
-    description: 'Segurança reforçada para portões e correntes. Acompanha 2 chaves.',
+    brand: 'Pado',
+    description: 'Corpo em latão maciço e haste em aço cementado. Nível de segurança padrão para portões.',
+    specs: {
+      'Tamanho': '35mm',
+      'Material': 'Latão',
+      'Chaves': '2 unidades',
+      'Haste': 'Média'
+    },
     image: 'https://images.unsplash.com/photo-1598822927289-54ebeb112e4f?q=80&w=400&auto=format&fit=crop',
-    available: true
-  },
-
-  // --- Fixação (NOVA) ---
-  {
-    id: 401,
-    name: 'Kit Parafusos e Buchas (200un)',
-    price: 42.50,
-    category: 'fixacao',
-    description: 'Maleta organizadora com buchas 6, 8 e 10mm e parafusos compatíveis.',
-    image: 'https://images.unsplash.com/photo-1581147036324-c17ac41dfa6c?q=80&w=400&auto=format&fit=crop',
     available: true
   },
 
   // --- Pintura ---
   {
     id: 10,
-    name: 'Tinta Látex Branca 18L Suvinil',
-    price: 329.00,
+    name: 'Tinta Acrílica Fosca Standard 18L',
+    price: 359.90, // Preço Suvinil Clássica
     category: 'pintura',
-    description: 'Tinta fosca standard para interiores. Alto rendimento e cobertura.',
+    brand: 'Suvinil',
+    description: 'Tinta de altíssimo rendimento e cobertura. Acabamento fosco aveludado que disfarça imperfeições.',
+    specs: {
+      'Volume': '18 Litros',
+      'Cor': 'Branco Neve',
+      'Uso': 'Interior/Exterior',
+      'Rendimento': 'Até 380m² por demão'
+    },
     image: 'https://images.unsplash.com/photo-1562259949-e8e7689d7828?q=80&w=400&auto=format&fit=crop',
     available: true,
     featured: true
   },
   {
     id: 11,
-    name: 'Kit Pintura Rolo + Bandeja + Pincel',
-    price: 45.00,
+    name: 'Kit Pintura 3 Peças (Rolo+Bandeja)',
+    price: 32.90,
     category: 'pintura',
-    description: 'Tudo o que você precisa para começar a pintar sua parede.',
+    brand: 'Atlas',
+    description: 'Kit prático com bandeja rígida, suporte e rolo de lã sintética antigota. Ideal para paredes lisas.',
+    specs: {
+      'Rolo': '23cm',
+      'Material': 'Lã Sintética',
+      'Indicação': 'Tinta Acrílica/Látex',
+      'Peças': '3'
+    },
     image: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=400&auto=format&fit=crop',
     available: true
   },
@@ -233,11 +328,34 @@ export const PRODUCTS: Product[] = [
   // --- Construção ---
   {
     id: 13,
-    name: 'Cimento CP II 50kg Votoran',
-    price: 36.00,
+    name: 'Cimento CP II-E-32 50kg',
+    price: 34.90, // Preço mercado Votoran
     category: 'construcao',
-    description: 'Cimento para uso geral, reboco, contrapiso e lajes. Retirada somente na loja.',
-    image: 'https://images.unsplash.com/photo-1518709779341-56cf4535e94b?q=80&w=400&auto=format&fit=crop',
+    brand: 'Votoran',
+    description: 'Cimento Todas as Obras. Versátil, serve da fundação ao acabamento. Secagem rápida.',
+    specs: {
+      'Peso': '50kg',
+      'Tipo': 'CP II-E-32',
+      'Embalagem': 'Saco Papel',
+      'Norma': 'NBR 11578'
+    },
+    image: 'https://images.unsplash.com/photo-1518709779341-56cf4535e94b?q=80&w=400&auto=format&fit=crop', // Textura de parede/construção
+    available: true
+  },
+  {
+    id: 401,
+    name: 'Maleta Parafusos e Buchas 200un',
+    price: 49.90,
+    category: 'fixacao',
+    brand: 'Bemfixa',
+    description: 'Kit organizador completo. Tenha sempre a bucha certa (6, 8 e 10mm) para pendurar quadros e móveis.',
+    specs: {
+      'Qtd Total': '200 peças',
+      'Medidas': '6mm, 8mm, 10mm',
+      'Parafusos': 'Philips Chipboard',
+      'Acompanha': 'Maleta Plástica'
+    },
+    image: 'https://images.unsplash.com/photo-1518609878373-06d740f60d8b?q=80&w=400&auto=format&fit=crop',
     available: true
   }
 ];

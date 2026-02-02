@@ -3,7 +3,9 @@ export interface Product {
   name: string;
   price: number;
   category: string;
+  brand?: string; // Tornando opcional para segurança
   description: string;
+  specs?: Record<string, string>;
   image: string;
   available: boolean;
   featured?: boolean;
@@ -17,12 +19,12 @@ export interface Category {
   id: string;
   name: string;
   icon: string;
-  image?: string; // Added for visual category grid
+  image?: string;
 }
 
 export enum CheckoutMethod {
   PICKUP = 'PICKUP',
-  DELIVERY = 'DELIVERY' // Not implemented in MVP but good for type safety
+  DELIVERY = 'DELIVERY'
 }
 
 export interface UserDetails {
