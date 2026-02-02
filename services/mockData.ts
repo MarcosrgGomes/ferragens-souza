@@ -5,61 +5,61 @@ export const CATEGORIES: Category[] = [
     id: 'eletrica', 
     name: 'Elétrica', 
     icon: 'Zap',
-    image: 'https://images.unsplash.com/photo-1555963966-b7ae5404b6ed?q=80&w=400&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1565514020125-63b516b0d912?q=80&w=400&auto=format&fit=crop' // Painel elétrico/fios
   },
   { 
     id: 'iluminacao', 
     name: 'Iluminação', 
     icon: 'Lightbulb',
-    image: 'https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?q=80&w=400&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1513506003013-d33544b03772?q=80&w=400&auto=format&fit=crop' // Lâmpadas modernas
   },
   { 
     id: 'ferramentas', 
     name: 'Ferramentas', 
     icon: 'Hammer',
-    image: 'https://images.unsplash.com/photo-1530124566582-a618bc2615dc?q=80&w=400&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1530124566582-a618bc2615dc?q=80&w=400&auto=format&fit=crop' // Bancada de ferramentas
   },
   { 
     id: 'hidraulica', 
     name: 'Hidráulica', 
     icon: 'Droplets',
-    image: 'https://images.unsplash.com/photo-1585909696092-c07a09d6f657?q=80&w=400&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=400&auto=format&fit=crop' // Canos e tubulações
   },
   { 
     id: 'pintura', 
     name: 'Pintura', 
     icon: 'PaintRoller',
-    image: 'https://images.unsplash.com/photo-1562259949-e8e7689d7828?q=80&w=400&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1562259949-e8e7689d7828?q=80&w=400&auto=format&fit=crop' // Rolos e parede pintada
   },
   { 
     id: 'construcao', 
     name: 'Construção', 
     icon: 'BrickWall',
-    image: 'https://images.unsplash.com/photo-1534237710431-e2fc698436d0?q=80&w=400&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1590486819529-d8112d8a86df?q=80&w=400&auto=format&fit=crop' // Tijolos e obra
   },
   { 
     id: 'jardinagem', 
     name: 'Jardinagem', 
     icon: 'Sprout',
-    image: 'https://images.unsplash.com/photo-1585320806297-9794b3e4eeae?q=80&w=400&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1416879156039-b99ffa432c66?q=80&w=400&auto=format&fit=crop' // Ferramentas de jardim
   },
   { 
     id: 'seguranca', 
     name: 'Segurança', 
     icon: 'Shield',
-    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=400&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?q=80&w=400&auto=format&fit=crop' // Tecnológico/Câmera
   },
   { 
     id: 'fixacao', 
     name: 'Fixação', 
     icon: 'Wrench',
-    image: 'https://images.unsplash.com/photo-1581147036324-c17ac41dfa6c?q=80&w=400&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1581147036324-c17ac41dfa6c?q=80&w=400&auto=format&fit=crop' // Parafusos e porcas
   },
   { 
     id: 'utilidades', 
     name: 'Utilidades', 
     icon: 'Home',
-    image: 'https://images.unsplash.com/photo-1584622050111-993a426fbf0a?q=80&w=400&auto=format&fit=crop'
+    image: 'https://images.unsplash.com/photo-1584622050111-993a426fbf0a?q=80&w=400&auto=format&fit=crop' // Casa/Utensílios
   },
 ];
 
@@ -68,10 +68,10 @@ export const PRODUCTS: Product[] = [
   {
     id: 1,
     name: 'Cabo Flexível 2.5mm 750V Rolo 100m',
-    price: 229.90, // Preço médio de mercado para marca boa (Sil/Corfio)
+    price: 229.90,
     category: 'eletrica',
     brand: 'Sil',
-    description: 'Fio de cobre flexível antichama, ideal para tomadas residenciais (10A/20A). Produto certificado pelo Inmetro. Flexibilidade classe 5.',
+    description: 'Fio de cobre flexível antichama, ideal para tomadas residenciais (10A/20A). Produto certificado pelo Inmetro.',
     specs: {
       'Bitola': '2.5mm',
       'Comprimento': '100 metros',
@@ -79,14 +79,15 @@ export const PRODUCTS: Product[] = [
       'Voltagem Máx': '750V',
       'Isolação': 'PVC Antichama BWF'
     },
-    image: 'https://images.unsplash.com/photo-1558317374-a354d5f6d4da?q=80&w=400&auto=format&fit=crop',
+    // Imagem de rolos de fios elétricos
+    image: 'https://images.unsplash.com/photo-1544724569-5f546fd6dd2d?q=80&w=400&auto=format&fit=crop',
     available: true,
     featured: true
   },
   {
     id: 2,
     name: 'Disjuntor Unipolar DIN 20A Curva C',
-    price: 22.50, // Preço Siemens/Steck
+    price: 22.50,
     category: 'eletrica',
     brand: 'Siemens',
     description: 'Disjuntor termomagnético para proteção de circuitos. Modelo DIN (branco), fácil encaixe em trilhos.',
@@ -96,13 +97,14 @@ export const PRODUCTS: Product[] = [
       'Curva': 'C (Cargas gerais)',
       'Capacidade': '3kA'
     },
-    image: 'https://images.unsplash.com/photo-1544724569-5f546fd6dd2d?q=80&w=400&auto=format&fit=crop', // Imagem de painel elétrico
+    // Imagem de quadro de distribuição/disjuntores
+    image: 'https://images.unsplash.com/photo-1555963966-b7ae5404b6ed?q=80&w=400&auto=format&fit=crop',
     available: true
   },
   {
     id: 3,
     name: 'Fita Isolante 33+ Profissional 20m',
-    price: 24.90, // Preço da 3M original
+    price: 24.90,
     category: 'eletrica',
     brand: '3M',
     description: 'A melhor fita do mercado. Alta aderência, flexibilidade e memória elástica. Suporta até 90°C.',
@@ -112,7 +114,8 @@ export const PRODUCTS: Product[] = [
       'Espessura': '0.19mm',
       'Uso': 'Profissional'
     },
-    image: 'https://images.unsplash.com/photo-1621905251189-08b45d6a269e?q=80&w=400&auto=format&fit=crop',
+    // Imagem de reparo elétrico/fita
+    image: 'https://images.unsplash.com/photo-1621905252507-b35492cc74b4?q=80&w=400&auto=format&fit=crop',
     available: true
   },
 
@@ -120,7 +123,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 101,
     name: 'Kit 5 Lâmpadas LED Bulbo 9W Bivolt',
-    price: 39.90, // Preço competitivo de kit
+    price: 39.90,
     category: 'iluminacao',
     brand: 'Avant',
     description: 'Kit econômico. Luz branca fria (6500K), ideal para cozinhas, escritórios e banheiros. Bivolt automático.',
@@ -130,7 +133,8 @@ export const PRODUCTS: Product[] = [
       'Soquete': 'E27 (Padrão)',
       'Vida Útil': '25.000h'
     },
-    image: 'https://images.unsplash.com/photo-1616165507965-797745778a05?q=80&w=400&auto=format&fit=crop',
+    // Lâmpada acesa clássica
+    image: 'https://images.unsplash.com/photo-1550989460-0adf9ea622e2?q=80&w=400&auto=format&fit=crop',
     available: true,
     featured: true
   },
@@ -147,7 +151,8 @@ export const PRODUCTS: Product[] = [
       'Cor Luz': 'Branco Frio',
       'Carcaça': 'Alumínio Preto'
     },
-    image: 'https://images.unsplash.com/photo-1542461927-948384913867?q=80&w=400&auto=format&fit=crop',
+    // Iluminação externa/foco de luz
+    image: 'https://images.unsplash.com/photo-1563456079-05a8fbd74753?q=80&w=400&auto=format&fit=crop',
     available: true
   },
 
@@ -155,7 +160,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 4,
     name: 'Torneira Jardim Esfera Metal 1/2"',
-    price: 35.90, // Preço Deca/Docol de entrada
+    price: 35.90,
     category: 'hidraulica',
     brand: 'Deca',
     description: 'Alta durabilidade e resistência. Acabamento cromado, sistema de abertura rápida por esfera. Inclui bico.',
@@ -165,13 +170,14 @@ export const PRODUCTS: Product[] = [
       'Uso': 'Área Externa/Tanque',
       'Garantia': '10 anos'
     },
-    image: 'https://images.unsplash.com/photo-1616400619175-5beda3a17896?q=80&w=400&auto=format&fit=crop',
+    // Torneira cromada
+    image: 'https://images.unsplash.com/photo-1585909696092-c07a09d6f657?q=80&w=400&auto=format&fit=crop',
     available: true
   },
   {
     id: 5,
     name: 'Tubo Soldável PVC 25mm Barra 3m',
-    price: 18.50, // Preço Tigre médio
+    price: 18.50,
     category: 'hidraulica',
     brand: 'Tigre',
     description: 'Tubo marrom clássico para água fria. O melhor PVC do mercado, não resseca e solda fácil.',
@@ -181,14 +187,15 @@ export const PRODUCTS: Product[] = [
       'Pressão': '7,5 kgf/cm²',
       'Norma': 'NBR 5648'
     },
-    image: 'https://images.unsplash.com/photo-1581094794329-c8112a89af12?q=80&w=400&auto=format&fit=crop', // Imagem conceitual de canos/obra
+    // Canos de PVC industrial/construção
+    image: 'https://images.unsplash.com/photo-1628131336495-2c836db55893?q=80&w=400&auto=format&fit=crop',
     available: true,
     featured: true
   },
   {
     id: 6,
     name: 'Caixa D\'Água Polietileno 1.000L',
-    price: 369.90, // Preço Fortlev
+    price: 369.90,
     category: 'hidraulica',
     brand: 'Fortlev',
     description: 'Tampa com travamento de 1/4 de volta, vedação total contra insetos. Interior liso para facilitar limpeza.',
@@ -198,15 +205,16 @@ export const PRODUCTS: Product[] = [
       'Camadas': '3',
       'Altura': '0,96m'
     },
-    image: 'https://images.unsplash.com/photo-1581092580497-e0d23cbdf1dc?q=80&w=400&auto=format&fit=crop',
-    available: false // Mantendo indisponível para testar a UI
+    // Imagem conceito de água/tanque
+    image: 'https://images.unsplash.com/photo-1544983058-2954848d7c43?q=80&w=400&auto=format&fit=crop',
+    available: false
   },
 
   // --- Ferramentas ---
   {
     id: 7,
     name: 'Martelo Unha 27mm Cabo Madeira',
-    price: 45.90, // Preço Tramontina
+    price: 45.90,
     category: 'ferramentas',
     brand: 'Tramontina',
     description: 'Cabeça forjada e temperada em aço especial. Cabo de madeira envernizada fixado com epóxi.',
@@ -216,13 +224,14 @@ export const PRODUCTS: Product[] = [
       'Cabo': 'Madeira Eucalipto',
       'Peso': '0.65 kg'
     },
+    // Martelo real
     image: 'https://images.unsplash.com/photo-1586864387967-d02ef85d93e8?q=80&w=400&auto=format&fit=crop',
     available: true
   },
   {
     id: 8,
     name: 'Jogo Chaves Fenda/Philips 6 Peças',
-    price: 79.90, // Jogo completo Tramontina Master
+    price: 79.90,
     category: 'ferramentas',
     brand: 'Tramontina',
     description: 'Haste em aço cromo vanádio (muito mais resistente). Pontas imantadas e cabo ergonômico.',
@@ -232,14 +241,15 @@ export const PRODUCTS: Product[] = [
       'Material': 'Cromo Vanádio',
       'Cabo': 'Grip Emborrachado'
     },
-    image: 'https://images.unsplash.com/photo-1530124566582-a618bc2615dc?q=80&w=400&auto=format&fit=crop',
+    // Várias ferramentas manuais
+    image: 'https://images.unsplash.com/photo-1540555616335-afdfdc392839?q=80&w=400&auto=format&fit=crop',
     available: true,
     featured: true
   },
   {
     id: 9,
     name: 'Furadeira de Impacto 1/2" 550W GSB',
-    price: 329.90, // Preço Bosch GSB 550
+    price: 329.90,
     category: 'ferramentas',
     brand: 'Bosch',
     description: 'Potente e robusta. Ideal para perfurações em concreto, madeira e metal. Acompanha chave de mandril.',
@@ -249,7 +259,8 @@ export const PRODUCTS: Product[] = [
       'Rotação': '3.100 min-1',
       'Impacto': 'Sim'
     },
-    image: 'https://images.unsplash.com/photo-1504148455328-c376907d081c?q=80&w=400&auto=format&fit=crop',
+    // Furadeira amarela/preta em ação
+    image: 'https://images.unsplash.com/photo-1572981779307-38b8cabb2407?q=80&w=400&auto=format&fit=crop',
     available: true
   },
 
@@ -267,6 +278,7 @@ export const PRODUCTS: Product[] = [
       'Pressão': 'Até 10 bar',
       'Cor': 'Verde'
     },
+    // Mangueira/Jardim
     image: 'https://images.unsplash.com/photo-1617576683096-00fc8eecb3af?q=80&w=400&auto=format&fit=crop',
     available: true,
     featured: true
@@ -276,7 +288,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 301,
     name: 'Cadeado 35mm Latão Maciço',
-    price: 36.90, // Preço Pado/Papaiz
+    price: 36.90,
     category: 'seguranca',
     brand: 'Pado',
     description: 'Corpo em latão maciço e haste em aço cementado. Nível de segurança padrão para portões.',
@@ -286,6 +298,7 @@ export const PRODUCTS: Product[] = [
       'Chaves': '2 unidades',
       'Haste': 'Média'
     },
+    // Cadeado fechado
     image: 'https://images.unsplash.com/photo-1598822927289-54ebeb112e4f?q=80&w=400&auto=format&fit=crop',
     available: true
   },
@@ -294,7 +307,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 10,
     name: 'Tinta Acrílica Fosca Standard 18L',
-    price: 359.90, // Preço Suvinil Clássica
+    price: 359.90,
     category: 'pintura',
     brand: 'Suvinil',
     description: 'Tinta de altíssimo rendimento e cobertura. Acabamento fosco aveludado que disfarça imperfeições.',
@@ -304,7 +317,8 @@ export const PRODUCTS: Product[] = [
       'Uso': 'Interior/Exterior',
       'Rendimento': 'Até 380m² por demão'
     },
-    image: 'https://images.unsplash.com/photo-1562259949-e8e7689d7828?q=80&w=400&auto=format&fit=crop',
+    // Balde de tinta sendo usado
+    image: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=400&auto=format&fit=crop',
     available: true,
     featured: true
   },
@@ -321,7 +335,8 @@ export const PRODUCTS: Product[] = [
       'Indicação': 'Tinta Acrílica/Látex',
       'Peças': '3'
     },
-    image: 'https://images.unsplash.com/photo-1589939705384-5185137a7f0f?q=80&w=400&auto=format&fit=crop',
+    // Pincéis e rolos
+    image: 'https://images.unsplash.com/photo-1572040917258-d05374827239?q=80&w=400&auto=format&fit=crop',
     available: true
   },
 
@@ -329,7 +344,7 @@ export const PRODUCTS: Product[] = [
   {
     id: 13,
     name: 'Cimento CP II-E-32 50kg',
-    price: 34.90, // Preço mercado Votoran
+    price: 34.90,
     category: 'construcao',
     brand: 'Votoran',
     description: 'Cimento Todas as Obras. Versátil, serve da fundação ao acabamento. Secagem rápida.',
@@ -339,7 +354,8 @@ export const PRODUCTS: Product[] = [
       'Embalagem': 'Saco Papel',
       'Norma': 'NBR 11578'
     },
-    image: 'https://images.unsplash.com/photo-1518709779341-56cf4535e94b?q=80&w=400&auto=format&fit=crop', // Textura de parede/construção
+    // Obra/Concreto
+    image: 'https://images.unsplash.com/photo-1518709779341-56cf4535e94b?q=80&w=400&auto=format&fit=crop',
     available: true
   },
   {
@@ -355,6 +371,7 @@ export const PRODUCTS: Product[] = [
       'Parafusos': 'Philips Chipboard',
       'Acompanha': 'Maleta Plástica'
     },
+    // Parafusos e buchas
     image: 'https://images.unsplash.com/photo-1518609878373-06d740f60d8b?q=80&w=400&auto=format&fit=crop',
     available: true
   }
